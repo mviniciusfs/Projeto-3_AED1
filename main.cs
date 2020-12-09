@@ -81,7 +81,7 @@ class MainClass
         
         if(cad2 == "NAO" || cad2 == "N")
         {
-          break;
+          Console.Write("teste");
         }
         //Usando tratamento de esceções
         else if(cad2 != "SIM" && cad2!= "S")
@@ -92,56 +92,50 @@ class MainClass
 
     }
 
-    if (cad == "N" || cad == "NAO")
+    else if(cad == "N" || cad == "NAO")
     {
+      //Imprimir na tela os Dispostivos disponíveis;
       Console.WriteLine();
-      Console.Write("PROGRAMA FINALIZADO");
-      Environment.Exit(0);           
+      Console.WriteLine("Deseja verificar o banco de Dispostivos? ");
+      string resultfinal = Console.ReadLine().ToUpper();
+      Console.WriteLine();
+
+      if(resultfinal == "SIM" || resultfinal == "S")
+      {
+        StreamReader y;
+        Console.WriteLine();
+        Console.WriteLine("LISTA DE DISPOSITIVOS");
+        Console.WriteLine();
+
+        string Caminho = "dados.txt";
+        y = File.OpenText(Caminho);
+
+        while(y.EndOfStream != true)
+        {
+          string linha = y.ReadLine();
+          Console.WriteLine(linha);        
+        }    
+        y.Close();
+
+        Console.WriteLine();
+        Console.Write("********PROGRAMA FINALIZADO*********");      
+      }
+
+      if(resultfinal == "NAO" || resultfinal == "N")
+      {
+        Console.Write("********PROGRAMA FINALIZADO*********");
+      }
+      //usando tratamento de exceções
+      else if(resultfinal != "N" || resultfinal != "S")
+      {
+        throw new System.ArgumentException("INVÁLIDO: Programa finalizado");
+      }
     }
+
 	  //usando tratamento de esceções
     else
     {
       throw new Exception("AVISO: OPÇÃO INVALIDA. PROGRAMA FINALIZADO!");
-    }
-
-    //Imprimir na tela os Dispostivos disponíveis;
-    Console.WriteLine();
-    Console.WriteLine("Deseja verificar o banco de Dispostivos? ");
-    string resultfinal = Console.ReadLine().ToUpper();
-    Console.WriteLine();
-
-    if(resultfinal == "SIM" || resultfinal == "S")
-    {
-      StreamReader y;
-
-      Console.WriteLine();
-      Console.WriteLine("LISTA DE DISPOSITIVOS");
-      Console.WriteLine();
-
-      string Caminho = "dados.txt";
-      y = File.OpenText(Caminho);
-
-      while(y.EndOfStream != true)
-      {
-        string linha = y.ReadLine();
-        Console.WriteLine(linha);        
-      }    
-      y.Close();
-
-      Console.WriteLine();
-      Console.Write("********PROGRAMA FINALIZADO*********");
-     
-    }
-
-    if(resultfinal == "NAO" || resultfinal == "N")
-    {
-      Console.Write("********PROGRAMA FINALIZADO*********");
-    }
-	  //usando tratamento de exceções
-    else if(resultfinal != "NAO" || resultfinal == "N" || resultfinal != "SIM" || resultfinal != "S")
-    {
-      throw new System.ArgumentException("INVÁLIDO: Programa finalizado");
-    }
-    
+    }    
   }
 }

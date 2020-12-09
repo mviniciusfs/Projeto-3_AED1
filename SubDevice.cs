@@ -20,7 +20,7 @@ class SubDevice : Device
 
     public string Imprimir()
     {
-      string dados = base.Imprimir() +"||Tipo: "+ Tipo +"||Responsável: "+ Responsavel +"Matrícula Resp.: "+ RespMatric;
+      string dados = base.Imprimir() +"||Tipo: "+ Tipo +"||Responsável: "+ Responsavel +"||Matrícula Resp.: "+ RespMatric;
 
       return dados;
     }    
