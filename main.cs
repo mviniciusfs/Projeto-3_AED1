@@ -17,21 +17,22 @@ class MainClass
     }
     z.Close();
 
-    Console.Write("Deseja cadastrar uma novo Dispositivo? ");
-    string cad = Console.ReadLine().ToUpper();
-
-    if(cad == "S" || cad == "SIM")
+    bool chave = true;
+    do
     {
       //Entrada dos dados pelo usuário
-      while(cad == "SIM" || cad == "S")
+      Console.Write("Deseja cadastrar uma novo Dispositivo? ");
+      string cad = Console.ReadLine().ToUpper();
+
+      if(cad == "S" || cad == "SIM" )
       {
-        Console.Write("Digite o Marca: ");
+        Console.Write("Digite a Marca: ");
         string marca = Console.ReadLine();
 
         Console.Write("Digite o Modelo: ");
         string modelo = Console.ReadLine();
 
-        Console.Write("Digite o Service Tag: ");
+        Console.Write("Digite a Service Tag: ");
         string stag = Console.ReadLine();
 
         Console.Write("Digite o Tipo: ");
@@ -43,8 +44,6 @@ class MainClass
         //Tratamento de exceções
         bool invalido = true;
         int matricularesp = 0;
-        double salario = 0;
-
         do
         {
           try
@@ -53,83 +52,71 @@ class MainClass
             matricularesp = int.Parse(Console.ReadLine());
             invalido = false;
           }
-          catch (FormatException)
+          catch(FormatException)
           {
             Console.WriteLine("Matrícula deve ser apenas NÚMEROS! Favor inserir novamente!");
             invalido = true;
           }
         }
         while (invalido);      
-       
+        
                     
         //Trabalhando com arquivo .txt
         StreamWriter x;
         string CaminhoNome = "dados.txt";
         x = File.AppendText(CaminhoNome);
-
         //Salvando dados no arquivo;
         ListControl.AddSubDevice(new SubDevice(marca, modelo, stag, tipo, responsaveldisp, matricularesp));
         List <SubDevice>Subdevices = ListControl.getListaSubDevice();      
         foreach(SubDevice subdevice in  Subdevices)
         {
-          x.WriteLine(subdevice.Imprimir().ToUpper());       
+          x.WriteLine(subdevice.Imprimir().ToUpper());
         }
         x.Close();
-
-        Console.Write("Deseja cadastrar um novo Dispositivo? ");
-        string cad2 = Console.ReadLine().ToUpper();
-        
-        if(cad2 == "NAO" || cad2 == "N")
-        {
-          Console.Write("teste");
-        }
-        //Usando tratamento de esceções
-        else if(cad2 != "SIM" && cad2!= "S")
-        {
-          throw new System.ArgumentException("INVÁLIDO: Programa finalizado");
-        }        
       }
 
+      else
+      {
+        chave = false;
+      } 
+    }
+    while(chave);
+
+    //Imprimir na tela os Dispostivos disponíveis;
+    Console.WriteLine();
+    Console.Write("Deseja verificar o banco de Dispostivos? ");
+    string resultfinal = Console.ReadLine().ToUpper();
+    Console.WriteLine();
+
+    if(resultfinal == "SIM" || resultfinal == "S")
+    {
+      StreamReader y;
+      Console.WriteLine();
+      Console.WriteLine("LISTA DE DISPOSITIVOS");
+      Console.WriteLine();
+
+      string Caminho = "dados.txt";
+      y = File.OpenText(Caminho);
+
+      while(y.EndOfStream != true)
+      {
+        string linha = y.ReadLine();
+        Console.WriteLine(linha);        
+      }    
+      y.Close();
+
+      Console.WriteLine();
+      Console.Write("********PROGRAMA FINALIZADO*********");      
     }
 
-    else if(cad == "N" || cad == "NAO")
+    if(resultfinal == "NAO" || resultfinal == "N")
     {
-      //Imprimir na tela os Dispostivos disponíveis;
-      Console.WriteLine();
-      Console.WriteLine("Deseja verificar o banco de Dispostivos? ");
-      string resultfinal = Console.ReadLine().ToUpper();
-      Console.WriteLine();
-
-      if(resultfinal == "SIM" || resultfinal == "S")
-      {
-        StreamReader y;
-        Console.WriteLine();
-        Console.WriteLine("LISTA DE DISPOSITIVOS");
-        Console.WriteLine();
-
-        string Caminho = "dados.txt";
-        y = File.OpenText(Caminho);
-
-        while(y.EndOfStream != true)
-        {
-          string linha = y.ReadLine();
-          Console.WriteLine(linha);        
-        }    
-        y.Close();
-
-        Console.WriteLine();
-        Console.Write("********PROGRAMA FINALIZADO*********");      
-      }
-
-      if(resultfinal == "NAO" || resultfinal == "N")
-      {
-        Console.Write("********PROGRAMA FINALIZADO*********");
-      }
-      //usando tratamento de exceções
-      else if(resultfinal != "N" || resultfinal != "S")
-      {
-        throw new System.ArgumentException("INVÁLIDO: Programa finalizado");
-      }
+      Console.Write("********PROGRAMA FINALIZADO*********");
+    }
+    //usando tratamento de exceções
+    if(resultfinal != "N" || resultfinal != "S")
+    {
+      throw new System.ArgumentException("INVÁLIDO: Programa finalizado");
     }
 
 	  //usando tratamento de esceções

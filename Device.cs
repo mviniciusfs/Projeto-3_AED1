@@ -8,6 +8,33 @@ class Device
     public string Modelo;
     public string ServiceTag;
 
+    public string Getmarca()
+    {
+      return Marca;
+    }
+    public void Setmarca(string m)
+    {
+      Marca = m;
+    }
+
+    public string Getmodelo()
+    {
+      return Modelo;
+    }
+    public void Setmodelo(string mo)
+    {
+      Modelo = mo;      
+    }
+
+    public string Getservicetag()
+    {
+      return ServiceTag;
+    }
+    public void Setservicetag(string st)
+    {
+      ServiceTag = st;
+    }
+
     public Device (string m, string mo, string st)
     {
       Marca = m;
@@ -18,7 +45,7 @@ class Device
           
     public string Imprimir()
     {
-      string dados = Marca +"||Modelo: "+ Modelo + "||ServiceTag: "+ ServiceTag;
+      string dados = "Marca: " + Marca +"||Modelo: "+ Modelo + "||ServiceTag: "+ ServiceTag;
 
       return dados;
     }
