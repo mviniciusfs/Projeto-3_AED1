@@ -48,6 +48,5 @@ class Device
       string dados = "Marca: " + Marca +"||Modelo: "+ Modelo + "||ServiceTag: "+ ServiceTag;
 
       return dados;
-    }
-        
+    }        
   }

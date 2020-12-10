@@ -17,11 +17,12 @@ class MainClass
     }
     z.Close();
 
+    ListControl error = new ListControl();
     bool chave = true;
     do
     {
       //Entrada dos dados pelo usuário
-      Console.Write("Deseja cadastrar uma novo Dispositivo? ");
+      Console.Write("Deseja cadastrar uma novo Dispositivo? S/N ");
       string cad = Console.ReadLine().ToUpper();
 
       if(cad == "S" || cad == "SIM" )
@@ -75,20 +76,25 @@ class MainClass
         x.Close();
       }
 
-      else
+      else if(cad == "N" || cad == "NAO" )
       {
         chave = false;
+      }
+
+      else
+      {
+        error.Exception();
       } 
     }
     while(chave);
 
     //Imprimir na tela os Dispostivos disponíveis;
     Console.WriteLine();
-    Console.Write("Deseja verificar o banco de Dispostivos? ");
-    string resultfinal = Console.ReadLine().ToUpper();
+    Console.Write("Deseja verificar o banco de Dispostivos? S/N ");
+    string buscadisp = Console.ReadLine().ToUpper();
     Console.WriteLine();
 
-    if(resultfinal == "SIM" || resultfinal == "S")
+    if(buscadisp == "SIM" || buscadisp == "S")
     {
       StreamReader y;
       Console.WriteLine();
@@ -109,20 +115,14 @@ class MainClass
       Console.Write("********PROGRAMA FINALIZADO*********");      
     }
 
-    if(resultfinal == "NAO" || resultfinal == "N")
+    if(buscadisp == "NAO" || buscadisp == "N")
     {
       Console.Write("********PROGRAMA FINALIZADO*********");
     }
     //usando tratamento de exceções
-    if(resultfinal != "N" || resultfinal != "S")
+    if(buscadisp != "N" && buscadisp != "S")
     {
-      throw new System.ArgumentException("INVÁLIDO: Programa finalizado");
-    }
-
-	  //usando tratamento de esceções
-    else
-    {
-      throw new Exception("AVISO: OPÇÃO INVALIDA. PROGRAMA FINALIZADO!");
+      error.Exception();
     }    
   }
 }

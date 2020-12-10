@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-static class ListControl
+class ListControl
 
   {
     //Lista - dados de Subdevices.
@@ -16,5 +16,10 @@ static class ListControl
     public static List<SubDevice> getListaSubDevice() 
     {
       return Subdevices;
+    }
+
+    public void Exception()
+    {
+      throw new System.ArgumentException("OPÇÃO INVÁLIDA: Programa finalizado");
     }          
   }
