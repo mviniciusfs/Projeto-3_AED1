@@ -8,7 +8,7 @@ class MainClass
   {
     //Título - Utilizar PROMPT MAXIMIZADO!!!
     StreamReader z;
-    string CaminhoT = "Titulo.txt";
+    string CaminhoT = "Ztitulo.txt";
     z = File.OpenText(CaminhoT);
     while(z.EndOfStream != true)
     {
@@ -64,7 +64,7 @@ class MainClass
                     
         //Trabalhando com arquivo .txt
         StreamWriter x;
-        string CaminhoNome = "dados.txt";
+        string CaminhoNome = "Zdados.txt";
         x = File.AppendText(CaminhoNome);
         //Salvando dados no arquivo;
         ListControl.AddSubDevice(new SubDevice(marca, modelo, stag, tipo, responsaveldisp, matricularesp));
@@ -79,6 +79,7 @@ class MainClass
       else if(cad == "N" || cad == "NAO" )
       {
         chave = false;
+        SubDevice person = new SubDevice("Param1", "Param2", "Param3", "Param4", "Param5", 1230); 
       }
 
       else
@@ -101,7 +102,7 @@ class MainClass
       Console.WriteLine("LISTA DE DISPOSITIVOS");
       Console.WriteLine();
 
-      string Caminho = "dados.txt";
+      string Caminho = "Zdados.txt";
       y = File.OpenText(Caminho);
 
       while(y.EndOfStream != true)
